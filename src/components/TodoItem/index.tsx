@@ -14,15 +14,32 @@ export const TodoItem: FC <TodoItemProps>= ({todoList, setTodoList}) => {
     setTodoList(updatedTodoList);
   }
 
+  function checkTodo(id: string){
+    const todoListUpdated = todoList.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          checked: !todo.checked, // Toggle the checked property
+        };
+      } else {
+        return todo;
+      }
+    });
+    setTodoList(todoListUpdated);
+  };
+
   return (
     <ul>
-      {todoList.length ? todoList.map(({id, text}) => {
-        return (
-          <div key={id} className='todo-item-container'>
-            <li>{text}</li>
-            <button onClick={() => onDelete(id)}>delete</button>
-          </div>
-        )
+      {todoList.length ? todoList.map(({id, text, checked}) => {
+        if(!checked) {
+          return (
+            <div key={id} className='todo-item-container'>
+              <li>{text}</li>
+              <button onClick={() => onDelete(id)}>delete</button>
+              <input type="checkbox" onChange={() => checkTodo(id)}/>
+            </div>
+          )
+        }
       }) : null}
     </ul>
   )

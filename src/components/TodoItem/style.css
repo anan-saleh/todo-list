@@ -1,0 +1,27 @@
+/* Todo item container */
+.todo-item-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Todo item text */
+.todo-item-container li {
+  margin-right: 10px;
+}
+
+/* Delete button */
+.todo-item-container button {
+  padding: 3px 6px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-item-container li {
+  list-style: decimal;
+}
+
+  

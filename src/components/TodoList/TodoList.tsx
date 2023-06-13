@@ -1,15 +1,17 @@
 import React, { useState, FC } from 'react';
 import { TodoItem } from '../TodoItem';
+import { CheckedTodo } from '../CheckedTodo/CheckedTodo';
 import { uniqueId } from '../../assets/utils';
 import { TodoListProps } from '../../assets/interface';
 
 import './style.css';
-import { CheckedTodo } from '../CheckedTodo/CheckedTodo';
+
+type TodoTab = 'TODO' | 'CHECKED' | 'DELETED';
 
 export const TodoList: FC = () => {
   const [newTodoText, setNewTodoText] = useState<string>('');
   const [todoList, setTodoList] = useState<TodoListProps[]>([]);
-  const [todoTab, setTodoTab] = useState<boolean>(true)
+  const [todoTab, setTodoTab] = useState<string>('TODO');
 
   function handleInputChange (event: React.ChangeEvent<HTMLInputElement>):void {
     const { value } = event.target;
@@ -25,8 +27,8 @@ export const TodoList: FC = () => {
     setNewTodoText('');
   }
 
-  function switchTabs() {
-    setTodoTab(!todoTab);
+  function switchTabs(tab: TodoTab) {
+    setTodoTab(tab);
   }
 
   return (
@@ -34,10 +36,11 @@ export const TodoList: FC = () => {
         <div className='todo-list-container'>
           <h1>Todo List</h1>
           <div className='todo-tabs'>
-            <button onClick={switchTabs}>Todo</button>
-            <button onClick={switchTabs}>Checked</button>
+            <button onClick={() => switchTabs('TODO')}>Todo</button>
+            <button onClick={() => switchTabs('CHECKED')}>Checked</button>
+            <button onClick={() => switchTabs('DELETED')}>Deleted</button>
           </div>
-          {todoTab && 
+          {todoTab === 'TODO' && 
           <>
             <form onSubmit={onSubmit}>
               <input type='text' name='todoText' value={newTodoText} onChange={handleInputChange}/>
@@ -46,8 +49,11 @@ export const TodoList: FC = () => {
           <TodoItem todoList={todoList} setTodoList={setTodoList} />
         </>
         }
-        {!todoTab && 
+        {todoTab === 'CHECKED' && 
         <CheckedTodo todoList={todoList}/>
+        }
+        {
+          todoTab === 'DELETED' && <>Deleted</>
         }
         </div>
     </>

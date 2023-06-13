@@ -10,8 +10,17 @@ interface TodoItemProps {
 export const TodoItem: FC <TodoItemProps>= ({todoList, setTodoList}) => {
 
   function onDelete(idToRemove: string) {
-    const updatedTodoList: TodoListProps[] = todoList.filter(item => item.id !== idToRemove);
-    setTodoList(updatedTodoList);
+    const todoListUpdated = todoList.map((todo) => {
+      if (todo.id === idToRemove) {
+        return {
+          ...todo,
+          deleted: !todo.deleted, // Toggle the checked property
+        };
+      } else {
+        return todo;
+      }
+    });
+    setTodoList(todoListUpdated);
   }
 
   function checkTodo(id: string){
@@ -30,8 +39,8 @@ export const TodoItem: FC <TodoItemProps>= ({todoList, setTodoList}) => {
 
   return (
     <ul>
-      {todoList.length ? todoList.map(({id, text, checked}) => {
-        if(!checked) {
+      {todoList.length ? todoList.map(({id, text, checked, deleted}) => {
+        if(!checked && !deleted) {
           return (
             <div key={id} className='todo-item-container'>
               <li>{text}</li>

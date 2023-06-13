@@ -1,10 +1,11 @@
 import React, { useState, FC } from 'react';
 import { TodoItem } from '../TodoItem';
-import { CheckedTodo } from '../CheckedTodo/CheckedTodo';
+import { CheckedTodo } from '../CheckedTodo';
 import { uniqueId } from '../../assets/utils';
 import { TodoListProps } from '../../assets/interface';
 
 import './style.css';
+import { DeletedTodo } from '../DeletedTodo';
 
 type TodoTab = 'TODO' | 'CHECKED' | 'DELETED';
 
@@ -23,7 +24,7 @@ export const TodoList: FC = () => {
     if (newTodoText.trim() === '') {
       return;
     }
-    setTodoList([...todoList, {id: uniqueId(), text: newTodoText.trim(), checked: false}])
+    setTodoList([...todoList, {id: uniqueId(), text: newTodoText.trim(), checked: false, deleted: false}])
     setNewTodoText('');
   }
 
@@ -53,7 +54,7 @@ export const TodoList: FC = () => {
         <CheckedTodo todoList={todoList}/>
         }
         {
-          todoTab === 'DELETED' && <>Deleted</>
+          todoTab === 'DELETED' && <DeletedTodo todoList={todoList}/>
         }
         </div>
     </>

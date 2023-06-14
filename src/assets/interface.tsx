@@ -4,4 +4,8 @@ export interface TodoListProps {
     checked: boolean;
     deleted: boolean
 }
+
+export interface reduxState {
+    todoList: TodoListProps[],
+  }
   

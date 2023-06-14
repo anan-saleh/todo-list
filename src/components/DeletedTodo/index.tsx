@@ -1,14 +1,12 @@
 import { FC } from 'react';
-import { TodoListProps } from '../../assets/interface';
+import { useSelector } from 'react-redux';
+import { reduxState } from '../../assets/interface';
 
-interface TodoItemProps {
-  todoList: TodoListProps[],
-}
-
-export const DeletedTodo: FC <TodoItemProps>= ({ todoList }) => {
+export const DeletedTodo: FC = () => {
+  const todoListState = useSelector((state: reduxState) => state.todoList);
   return (
     <ul>
-      {todoList.length ? todoList.map(({id, text, deleted}) => {
+      {todoListState.length ? todoListState.map(({id, text, deleted}) => {
         if(deleted) {
           return (
             <div key={id} className='todo-item-checked-container'>

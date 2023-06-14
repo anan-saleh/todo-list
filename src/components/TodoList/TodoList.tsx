@@ -1,18 +1,20 @@
 import React, { useState, FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { TodoItem } from '../TodoItem';
 import { CheckedTodo } from '../CheckedTodo';
 import { uniqueId } from '../../assets/utils';
 import { TodoListProps } from '../../assets/interface';
+import { DeletedTodo } from '../DeletedTodo';
+import { addAction } from '../../actions/todo-actions';
 
 import './style.css';
-import { DeletedTodo } from '../DeletedTodo';
 
 type TodoTab = 'TODO' | 'CHECKED' | 'DELETED';
 
 export const TodoList: FC = () => {
   const [newTodoText, setNewTodoText] = useState<string>('');
-  const [todoList, setTodoList] = useState<TodoListProps[]>([]);
   const [todoTab, setTodoTab] = useState<string>('TODO');
+  const dispatch = useDispatch();
 
   function handleInputChange (event: React.ChangeEvent<HTMLInputElement>):void {
     const { value } = event.target;
@@ -24,7 +26,13 @@ export const TodoList: FC = () => {
     if (newTodoText.trim() === '') {
       return;
     }
-    setTodoList([...todoList, {id: uniqueId(), text: newTodoText.trim(), checked: false, deleted: false}])
+    const todo: TodoListProps = {
+      id: uniqueId(), 
+      text: newTodoText.trim(), 
+      checked: false, 
+      deleted: false
+    }
+    dispatch(addAction(todo))
     setNewTodoText('');
   }
 
@@ -47,14 +55,14 @@ export const TodoList: FC = () => {
               <input type='text' name='todoText' value={newTodoText} onChange={handleInputChange}/>
               <button className='add-button'>Add</button>
             </form>
-          <TodoItem todoList={todoList} setTodoList={setTodoList} />
+          <TodoItem />
         </>
         }
         {todoTab === 'CHECKED' && 
-        <CheckedTodo todoList={todoList}/>
+        <CheckedTodo />
         }
         {
-          todoTab === 'DELETED' && <DeletedTodo todoList={todoList}/>
+          todoTab === 'DELETED' && <DeletedTodo/>
         }
         </div>
     </>

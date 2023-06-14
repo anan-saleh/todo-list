@@ -1,45 +1,23 @@
-import React ,{ FC } from 'react';
-import { TodoListProps } from '../../assets/interface';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAction, checkAction } from '../../actions/todo-actions';
+import { reduxState } from '../../assets/interface';
 import './style.css';
 
-interface TodoItemProps {
-  todoList: TodoListProps[],
-  setTodoList: React.Dispatch<React.SetStateAction<TodoListProps[]>>
-}
-
-export const TodoItem: FC <TodoItemProps>= ({todoList, setTodoList}) => {
-
-  function onDelete(idToRemove: string) {
-    const todoListUpdated = todoList.map((todo) => {
-      if (todo.id === idToRemove) {
-        return {
-          ...todo,
-          deleted: !todo.deleted, // Toggle the checked property
-        };
-      } else {
-        return todo;
-      }
-    });
-    setTodoList(todoListUpdated);
+export const TodoItem: FC = () => {
+  const todoListState = useSelector((state: reduxState) => state.todoList);
+  const dispatch = useDispatch();
+  function onDelete(id: string) {
+    dispatch((deleteAction(id)));
   }
 
   function checkTodo(id: string){
-    const todoListUpdated = todoList.map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          checked: !todo.checked, // Toggle the checked property
-        };
-      } else {
-        return todo;
-      }
-    });
-    setTodoList(todoListUpdated);
+    dispatch(checkAction(id));
   };
 
   return (
     <ul>
-      {todoList.length ? todoList.map(({id, text, checked, deleted}) => {
+      {todoListState.length ? todoListState.map(({id, text, checked, deleted}) => {
         if(!checked && !deleted) {
           return (
             <div key={id} className='todo-item-container'>

@@ -15,16 +15,16 @@ export const DeletedTodo: FC = () => {
 
   return (
     <ul>
-      {todoListState.length ? todoListState.map(({id, text, deleted}) => {
-        if(deleted) {
+      {Object.keys(todoListState).map((todo) => {
+        if(todoListState[todo].deleted) {
           return (
-            <div key={id} className='todo-item-deleted-container'>
-              <li>{text}</li>
-              <button onClick={() => unDeleteTodo(id)}>Undelete</button>
+            <div key={todoListState[todo].id} className='todo-item-checked-container'>
+              <li>{todoListState[todo].text}</li>
+              <button onClick={() => unDeleteTodo(todoListState[todo].id)}>Undelete</button>
             </div>
           )
         }
-      }) : null}
+      })}
     </ul>
   )
 }

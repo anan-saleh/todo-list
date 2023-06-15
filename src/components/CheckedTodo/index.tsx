@@ -14,16 +14,16 @@ export const CheckedTodo: FC = () => {
   }
   return (
     <ul>
-      {todoListState.length ? todoListState.map(({id, text, checked}) => {
-        if(checked) {
+      {Object.keys(todoListState).map((todo) => {
+        if(todoListState[todo].checked) {
           return (
-            <div key={id} className='todo-item-checked-container'>
-              <li>{text}</li>
-              <input type="checkbox" checked onChange={() => unCheckTodo(id)}/>
+            <div key={todoListState[todo].id} className='todo-item-checked-container'>
+              <li>{todoListState[todo].text}</li>
+              <input type="checkbox" checked onChange={() => unCheckTodo(todoListState[todo].id)}/>
             </div>
           )
         }
-      }) : null}
+      })}
     </ul>
   )
 }

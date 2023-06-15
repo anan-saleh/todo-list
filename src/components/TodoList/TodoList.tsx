@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { TodoItem } from '../TodoItem';
 import { CheckedTodo } from '../CheckedTodo';
 import { uniqueId } from '../../assets/utils';
-import { TodoListProps } from '../../assets/interface';
+import { Todo } from '../../assets/interface';
 import { DeletedTodo } from '../DeletedTodo';
 import { addAction } from '../../actions/todo-actions';
 
@@ -26,7 +26,7 @@ export const TodoList: FC = () => {
     if (newTodoText.trim() === '') {
       return;
     }
-    const todo: TodoListProps = {
+    const todo: Todo = {
       id: uniqueId(), 
       text: newTodoText.trim(), 
       checked: false, 

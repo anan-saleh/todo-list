@@ -1,7 +1,7 @@
 import { TodoActionTypes} from "./action-types";
-import { TodoListProps } from "../assets/interface";
+import { Todo } from "../assets/interface";
 
-const addAction = (payload : TodoListProps) => {
+const addAction = (payload : Todo) => {
     return { type: TodoActionTypes.ADD_TODO, payload }
 }
 

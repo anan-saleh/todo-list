@@ -13,7 +13,7 @@ export const TodoItem: FC = () => {
 
   function checkTodo(id: string){
     dispatch(checkAction(id));
-  };
+  }
 
   return (
     <ul>
@@ -25,10 +25,11 @@ export const TodoItem: FC = () => {
               <button onClick={() => onDelete(todoListState[todo].id)}>delete</button>
               <input type="checkbox" onChange={() => checkTodo(todoListState[todo].id)}/>
             </div>
-          )
+          );
         }
+        return null;
       })}
     </ul>
-  )
+  );
 
-}
+};

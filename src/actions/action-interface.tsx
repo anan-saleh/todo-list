@@ -1,4 +1,4 @@
-import { TodoListProps } from "../assets/interface";
+import { TodoListProps } from '../assets/interface';
 
 export interface AddTodoAction {
     type: string;

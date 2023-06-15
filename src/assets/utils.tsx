@@ -1,4 +1,4 @@
 
 export const uniqueId = ():string => {
-    return crypto.randomUUID();
-}
+  return crypto.randomUUID();
+};

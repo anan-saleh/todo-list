@@ -20,11 +20,12 @@ export const DeletedTodo: FC = () => {
           return (
             <div key={todoListState[todo].id} className='todo-item-checked-container'>
               <li>{todoListState[todo].text}</li>
-              <button onClick={() => unDeleteTodo(todoListState[todo].id)}>Undelete</button>
+              <button onClick={() => unDeleteTodo(todoListState[todo].id)}>Undeleted</button>
             </div>
-          )
+          );
         }
+        return null;
       })}
     </ul>
-  )
-}
+  );
+};

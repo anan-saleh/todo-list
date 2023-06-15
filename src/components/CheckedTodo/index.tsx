@@ -21,9 +21,10 @@ export const CheckedTodo: FC = () => {
               <li>{todoListState[todo].text}</li>
               <input type="checkbox" checked onChange={() => unCheckTodo(todoListState[todo].id)}/>
             </div>
-          )
+          );
         }
+        return null;
       })}
     </ul>
-  )
-}
+  );
+};

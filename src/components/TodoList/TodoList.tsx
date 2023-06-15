@@ -31,8 +31,8 @@ export const TodoList: FC = () => {
       text: newTodoText.trim(), 
       checked: false, 
       deleted: false
-    }
-    dispatch(addAction(todo))
+    };
+    dispatch(addAction(todo));
     setNewTodoText('');
   }
 
@@ -42,21 +42,21 @@ export const TodoList: FC = () => {
 
   return (
     <>
-        <div className='todo-list-container'>
-          <h1>Todo List</h1>
-          <div className='todo-tabs'>
-            <button onClick={() => switchTabs('TODO')}>Todo</button>
-            <button onClick={() => switchTabs('CHECKED')}>Checked</button>
-            <button onClick={() => switchTabs('DELETED')}>Deleted</button>
-          </div>
-          {todoTab === 'TODO' && 
+      <div className='todo-list-container'>
+        <h1>Todo List</h1>
+        <div className='todo-tabs'>
+          <button onClick={() => switchTabs('TODO')}>Todo</button>
+          <button onClick={() => switchTabs('CHECKED')}>Checked</button>
+          <button onClick={() => switchTabs('DELETED')}>Deleted</button>
+        </div>
+        {todoTab === 'TODO' && 
           <>
             <form onSubmit={onSubmit}>
               <input type='text' name='todoText' value={newTodoText} onChange={handleInputChange}/>
               <button className='add-button'>Add</button>
             </form>
-          <TodoItem />
-        </>
+            <TodoItem />
+          </>
         }
         {todoTab === 'CHECKED' && 
         <CheckedTodo />
@@ -64,7 +64,7 @@ export const TodoList: FC = () => {
         {
           todoTab === 'DELETED' && <DeletedTodo/>
         }
-        </div>
+      </div>
     </>
-  )
-}
+  );
+};

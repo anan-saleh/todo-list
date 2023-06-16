@@ -30,7 +30,8 @@ export const TodoList: FC = () => {
       id: uniqueId(), 
       text: newTodoText.trim(), 
       checked: false, 
-      deleted: false
+      deleted: false,
+      subTodoList: {}
     };
     dispatch(addAction(todo));
     setNewTodoText('');

@@ -1,11 +1,12 @@
-import { Todo, TodoListProps } from '../assets/interface';
+import { Todo, TodoListProps, subTodoList, subTodoListProps } from '../assets/interface';
 import { TodoActionTypes } from '../actions/action-types';
 import { AnyAction } from 'redux';
-import { AddTodoAction, CheckTodoAction, DeleteTodoAction } from '../actions/action-interface';
+import { AddTodoAction, CheckTodoAction, DeleteTodoAction, AddSubTodoAction } from '../actions/action-interface';
 
 const initialState: TodoListProps = {};
+const initialStateSubTodo: subTodoListProps = {};
 
-type TodoAction = AddTodoAction | CheckTodoAction | DeleteTodoAction | AnyAction;
+type TodoAction = AddTodoAction | CheckTodoAction | DeleteTodoAction | AddSubTodoAction | AnyAction;
 
 const todoReducer = (state = initialState, action: TodoAction): TodoListProps => {
   switch (action.type) {
@@ -15,11 +16,33 @@ const todoReducer = (state = initialState, action: TodoAction): TodoListProps =>
       text: action.payload.text,
       checked: action.payload.checked,
       deleted: action.payload.deleted,
+      subTodoList : initialStateSubTodo
     };
     return {...state,
       [newTodo.id]: newTodo
     };
   }
+
+  case TodoActionTypes.ADD_SUB_TODO : {
+    const subTodo: subTodoList = {
+      id: action.payload.todo.id,
+      text: action.payload.todo.text,
+      checked: action.payload.todo.checked,
+      deleted: action.payload.todo.deleted,
+    };
+    const newTodo: Todo = {
+      ...state[action.payload.id],
+      subTodoList: {
+        ...(state[action.payload.id]?.subTodoList || initialStateSubTodo),
+        [subTodo.id]: subTodo,
+      }
+    };
+    return { 
+      ...state,
+      [newTodo.id]: newTodo,
+    };
+  }
+
   case TodoActionTypes.CHECK_TODO: {
     const checkedTodo = {
       ...state[action.payload],

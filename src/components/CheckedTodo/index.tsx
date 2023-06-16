@@ -18,7 +18,7 @@ export const CheckedTodo: FC = () => {
         if(todoListState[todo].checked) {
           return (
             <div key={todoListState[todo].id} className='todo-item-checked-container'>
-              <li>{todoListState[todo].text}</li>
+              <li><del>{todoListState[todo].text}</del></li>
               <input type="checkbox" checked onChange={() => unCheckTodo(todoListState[todo].id)}/>
             </div>
           );

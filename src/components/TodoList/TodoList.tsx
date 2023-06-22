@@ -8,6 +8,7 @@ import { DeletedTodo } from '../DeletedTodo';
 import { addAction } from '../../actions/todo-actions';
 
 import './style.css';
+import { addTodo } from '../../reducers/todoReducer';
 
 type TodoTab = 'TODO' | 'CHECKED' | 'DELETED';
 
@@ -33,7 +34,7 @@ export const TodoList: FC = () => {
       deleted: false,
       subTodoList: {}
     };
-    dispatch(addAction(todo));
+    dispatch(addTodo(todo));
     setNewTodoText('');
   }
 

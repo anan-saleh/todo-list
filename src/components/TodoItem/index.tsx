@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAction, checkAction, addSubTodoAction } from '../../actions/todo-actions';
 import { subTodoList, reduxState } from '../../assets/interface';
 import './style.css';
 import { uniqueId } from '../../assets/utils';
+import { addSubTodo, checkTodo, deleteTodo } from '../../reducers/todoReducer';
 
 export const TodoItem: FC = () => {
   const [openForm, setOpenForm] = useState<boolean>(false);
@@ -11,7 +11,7 @@ export const TodoItem: FC = () => {
   const todoListState = useSelector((state: reduxState) => state.todoList);
   const dispatch = useDispatch();
   function onDelete(id: string) {
-    dispatch((deleteAction(id)));
+    dispatch(deleteTodo(id));
   }
 
   function handleInputChange (event: React.ChangeEvent<HTMLInputElement>):void {
@@ -30,12 +30,12 @@ export const TodoItem: FC = () => {
       checked: false, 
       deleted: false,
     };
-    dispatch(addSubTodoAction({id ,todo}));
+    dispatch(addSubTodo({id ,todo}));
     setNewTodoText('');
   }
 
-  function checkTodo(id: string){
-    dispatch(checkAction(id));
+  function checkTodoList(id: string){
+    dispatch(checkTodo(id));
   }
 
   return (
@@ -48,7 +48,7 @@ export const TodoItem: FC = () => {
                 <li>{todoListState[todo].text}</li>
                 <button onClick={() => setOpenForm(!openForm)}>Add sub todo</button>
                 <button onClick={() => onDelete(todoListState[todo].id)}>delete</button>
-                <input type="checkbox" onChange={() => checkTodo(todoListState[todo].id)}/>
+                <input type="checkbox" onChange={() => checkTodoList(todoListState[todo].id)}/>
                 {openForm && 
                   <form onSubmit={(e) => onSubmit(e ,todoListState[todo].id)}>
                     <input type='text' name='todoText' value={newTodoText} onChange={handleInputChange}/>

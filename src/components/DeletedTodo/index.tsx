@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../assets/interface';
-import { deleteAction } from '../../actions/todo-actions';
 
 import './style.css';
+import { deleteTodo } from '../../reducers/todoReducer';
 
 export const DeletedTodo: FC = () => {
   const todoListState = useSelector((state: reduxState) => state.todoList);
   const dispatch = useDispatch();
 
   function unDeleteTodo(id: string) {
-    dispatch(deleteAction(id));
+    dispatch(deleteTodo(id));
   }
 
   return (

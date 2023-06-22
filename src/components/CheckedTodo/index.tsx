@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../assets/interface';
-import { checkAction } from '../../actions/todo-actions';
 
 import './style.css';
+import { checkTodo } from '../../reducers/todoReducer';
 
 export const CheckedTodo: FC = () => {
   const todoListState = useSelector((state: reduxState) => state.todoList);
   const dispatch = useDispatch();
 
   function unCheckTodo(id: string) {
-    dispatch(checkAction(id));
+    dispatch(checkTodo(id));
   }
   return (
     <ul>

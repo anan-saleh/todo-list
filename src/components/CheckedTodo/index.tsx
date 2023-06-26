@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../assets/interface';
 
 import './style.css';
-import { checkTodo } from '../../reducers/todoReducer';
+import { checkTodo } from '../../features/todo/todoSlice';
 
 export const CheckedTodo: FC = () => {
   const todoListState = useSelector((state: reduxState) => state.todoList);

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { subTodoList, reduxState } from '../../assets/interface';
 import './style.css';
 import { uniqueId } from '../../assets/utils';
-import { addSubTodo, checkTodo, deleteTodo } from '../../reducers/todoReducer';
+import { addSubTodo, checkTodo, deleteTodo } from '../../features/todo/todoSlice';
 
 export const TodoItem: FC = () => {
   const [openForm, setOpenForm] = useState<boolean>(false);

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../assets/interface';
 
 import './style.css';
-import { deleteTodo } from '../../reducers/todoReducer';
+import { deleteTodo } from '../../features/todo/todoSlice';
 
 export const DeletedTodo: FC = () => {
   const todoListState = useSelector((state: reduxState) => state.todoList);

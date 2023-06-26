@@ -5,10 +5,9 @@ import { CheckedTodo } from '../CheckedTodo';
 import { uniqueId } from '../../assets/utils';
 import { Todo } from '../../assets/interface';
 import { DeletedTodo } from '../DeletedTodo';
-import { addAction } from '../../actions/todo-actions';
 
 import './style.css';
-import { addTodo } from '../../reducers/todoReducer';
+import { addTodo } from '../../features/todo/todoSlice';
 
 type TodoTab = 'TODO' | 'CHECKED' | 'DELETED';
 

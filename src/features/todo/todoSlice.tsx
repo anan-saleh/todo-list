@@ -1,5 +1,5 @@
-import { Todo, TodoListProps, subTodoList, subTodoListProps } from '../assets/interface';
 import { createSlice } from '@reduxjs/toolkit';
+import { Todo, TodoListProps, subTodoList, subTodoListProps } from '../../assets/interface';
 
 const initialState: TodoListProps = {};
 const initialStateSubTodo: subTodoListProps = {};

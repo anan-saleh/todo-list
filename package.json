@@ -18,11 +18,13 @@
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.13.0",
     "redux": "^4.2.1",
+    "redux-logger": "^3.0.6",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "@vitejs/plugin-react": "^4.0.0",
